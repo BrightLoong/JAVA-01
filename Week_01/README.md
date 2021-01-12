@@ -79,4 +79,45 @@
 3. 画一张图，展示 Xmx、Xms、Xmn、Metaspache、DirectMemory、Xss 这些内存参数的关系。
    ![内存参数关系](./resources/内存参数关系.png)
 4. 检查一下自己维护的业务系统的 JVM 参数配置，用 jstat 和 jstack、jmap 查看一下详情，并且自己独立分析一下大概情况，思考有没有不合理的地方，如何改进。
-   TODO
+   <br>线上业务系统无法使用命令查看，通过监控系统获取了部分和用命令查询得到结果类似的内容
+   <br>首先是JVM启动参数
+   ```
+   -Dlog4j.configuration=log4j.properties;
+   -Dspring.profiles.active=prod;
+   -XX:MetaspaceSize=256M;          //元数据区
+   -XX:MaxMetaspaceSize=256M;       //元数据最大值
+   -Xmx4g;                          //最大堆内存
+   -Xms4g;                          //初始堆内存
+   -Xss256k;                        //最大栈
+   -XX:-OmitStackTraceInFastThrow;
+   -XX:+UseG1GC;                    //G1
+   -XX:ParallelGCThreads=8;         //并行GC线程数
+   -XX:+AlwaysPreTouch;
+   -XX:-UseBiasedLocking;
+   -XX:MaxGCPauseMillis=80;         //最大暂停时间
+   -XX:+HeapDumpOnOutOfMemoryError;  
+   -Xloggc:/var/log/xxx/gc.log;  
+   -XX:+PrintGCApplicationConcurrentTime;
+   -XX:+PrintGCApplicationStoppedTime;
+   -XX:+PrintGCDetails;             //GC日志详情
+   -XX:+PrintGCDateStamps;
+   -XX:+UseGCLogFileRotation;
+   -XX:NumberOfGCLogFiles=10;
+   -XX:GCLogFileSize=100m;
+   -Xverify:none;
+   ```
+   
+   查看监控系统得到以下一些信息(1天的数据来分析得出的)：
+   
+   - YoungGC平均每10分钟15次左右，平均时间15ms左右（10分钟总时间/10分钟总次数）
+   - 老年代使用内存在1.5G左右
+   - Eden内存使用上，看起来不会超过2G，基本都在1.5G以上，自适应调整的结果（UseAdaptiveSizePolicy)
+   
+   我的分析：
+   
+   首先，G1垃圾收集器使用建议就是有一个比较大的内存，4G我认为是和G1垃圾收集器不匹配的。其次，G1垃圾收集器有两个参数可以控制新生代大小，
+   下限：-XX:G1NewSizePercent，默认值5%，上限：-XX:G1MaxNewSizePercent，默认值60%，从上面数据可以看出来，开启了自适应调整，新生代使用
+   也经常接近上限60%，而老年代长期在1.5G以上。**我认为可以适当增加堆内存，可以减少Young GC的频率**。
+   
+   
+5. 本机使用 G1 GC 启动一个程序，仿照课上案例分析一下 JVM 情况
