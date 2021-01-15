@@ -119,7 +119,7 @@
    也经常接近上限60%，而老年代长期在1.5G以上。**我认为可以适当增加堆内存，可以减少Young GC的频率**。
    
 ### 第二次课程作业
-####1. 本机使用 G1 GC 启动一个程序，仿照课上案例分析一下 JVM 情况
+#### 1. 本机使用 G1 GC 启动一个程序，仿照课上案例分析一下 JVM 情况
    启动参数
    ```
    java -Xmx1g -Xms1g -XX:-UseAdaptiveSizePolicy -XX:+UseSerialGC -jar gateway-server- 0.0.1-SNAPSHOT.jar
@@ -177,6 +177,7 @@
 - FGC表示full gc的次数
 - FGCT表示full gc花费的时间
 - GCT表示gc的时间
+
 使用`jmap -heap pid`查看内存信息
 ```
 Garbage-First (G1) GC with 4 thread(s)
