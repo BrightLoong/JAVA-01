@@ -151,18 +151,22 @@ TODO
 压测参数 `wrk -c 40 -d30s <url>`
 #### HttpServer01
 ![HttpServer01](./src/main/resources/HttpServer01.png)
+
 单线程的socket程序，每个请求都是串行的，每个请求都会阻塞，一次只能处理一个请求，明显无法充分利用资源。
 #### HttpServer02
 ![HttpServer01](./src/main/resources/HttpServer01.png)
+
 每个请求一个线程，频繁的创建，销毁线程，造成巨大的开销。并且会出现同一时刻大量线程处于阻塞状态，以及大量线程频繁进行上下文切换，拉低应用性能。
 #### HttpServer03
 ![HttpServer01](./src/main/resources/HttpServer01.png)
+
 使用线程池，虽然省去了频繁的创建，销毁线程的开销，但在IO模型上本质还是阻塞的。
 #### NettyHttpServer
 ![HttpServer01](./src/main/resources/netty.png)
+
 上面都是基于BIO进行的实现，是阻塞的，并且基于流进行读取。netty基于NIO，采用事件驱动的方式，IO多路复用，非阻塞。
 
 
-### 2、(必做)写一段代码，使用 HttpClient 或 OkHttp 访问 http://localhost:8801，代 码提交到Github。
+### 2、(必做)写一段代码，使用 HttpClient 或 OkHttp 访问 http://localhost:8801,代码提交到Github。
 使用OkHttp进行实现
 [OkHttpUtils.java](./src/main/java/io/github/brightloong/week02/io/utils/OkHttpUtils.java)
