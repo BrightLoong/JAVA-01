@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:test="http://mytest/test"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context-3.2.xsd
+                        http://mytest/test
+                        http://mytest/test/test.xsd">
+
+    <test:student id="student1" name="LiMingMing"/>
+
+    <test:student id="student2" name="HanMeiMei"/>
+
+    <test:klass id="klass1">
+        <test:student-ref bean="student1"/>
+        <test:student-ref bean="student2"/>
+    </test:klass>
+
+    <test:school id="school1">
+        <test:klass-ref bean="klass1"/>
+    </test:school>
+</beans>

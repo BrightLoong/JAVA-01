@@ -1,0 +1,10 @@
+school:
+  klass-properties-map:
+    klass1:
+      - id: student
+        name: student
+      - id: student2
+        name: student22
+    klass2:
+      - id: student3
+        name: student3

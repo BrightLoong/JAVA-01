@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns="http://mytest/test"
+            targetNamespace="http://mytest/test"
+            elementFormDefault="qualified">
+
+    <xsd:element name="student">
+        <xsd:complexType>
+            <xsd:attribute name="id" type="xsd:string" />
+            <xsd:attribute name="name" type="xsd:string" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="klass">
+        <xsd:complexType>
+           <xsd:choice maxOccurs="unbounded">
+               <xsd:element name="student-ref">
+                   <xsd:complexType>
+                       <xsd:attribute name="bean" type="xsd:string" />
+                   </xsd:complexType>
+               </xsd:element>
+           </xsd:choice>
+            <xsd:attribute name="id" type="xsd:string" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="school">
+        <xsd:complexType>
+            <xsd:choice maxOccurs="unbounded">
+                <xsd:element name="klass-ref">
+                    <xsd:complexType>
+                        <xsd:attribute name="bean" type="xsd:string" />
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:choice>
+            <xsd:attribute name="id" type="xsd:string" />
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>
