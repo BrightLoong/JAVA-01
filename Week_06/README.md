@@ -22,7 +22,7 @@ CREATE TABLE `order` (
   `user_address_id` int(11) NOT NULL COMMENT '订单收货地址id',
   `order_status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '订单转态1.下单2.已支付，3已收货，4已退款，5.交易完成',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '数据创建时间',
-  `last_updated_time` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '数据最后更新时间',
+  `last_updated_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '数据最后更新时间',
   `order_pay` decimal(10,2) NOT NULL COMMENT '订单实付',
   PRIMARY KEY (`id`),
   KEY `idx_order_no` (`order_no`),

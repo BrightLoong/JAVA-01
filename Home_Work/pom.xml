@@ -15,6 +15,7 @@
         <module>instrumentation_agent</module>
         <module>bytebuddy_agent</module>
         <module>school-spring-boot-starter</module>
+        <module>bright-datasource-spring-boot-start</module>
     </modules>
 
     <properties>

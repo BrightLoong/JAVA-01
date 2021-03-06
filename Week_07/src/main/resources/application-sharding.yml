@@ -1,0 +1,54 @@
+spring:
+  # 相关的配置
+  shardingsphere:
+    props:
+      sql-show: true
+    datasource:
+      common:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+      # 配置数据源的名称
+      names: ds1,ds2,ds3
+      # 第一个数据源
+      ds1:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        jdbcUrl: jdbc:mysql://localhost:3306/ds1?serverTimezone=CTT&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+        username: root
+        password: 123456
+      # 第二个数据源
+      ds2:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        jdbcUrl: jdbc:mysql://localhost:3306/ds2?serverTimezone=CTT&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+        username: root
+        password: 123456
+      ds3:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        jdbcUrl: jdbc:mysql://localhost:3306/ds3?serverTimezone=CTT&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+        username: root
+        password: 123456
+    rules:
+      replica-query:
+        data-sources:
+          ds:
+            primary-data-source-name: ds1
+            replica-data-source-names: ds2,ds3
+            load-balancer-name: round-robin
+        load-balancers:
+          round-robin:
+            type: ROUND_ROBIN
+            props:
+              defaule: 0
+
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: io.github.brightloong.mysql.domain.pojo
+
+
+mapper:
+  not-empty: false
+  identity: MYSQL
+  mappers: io.github.brightloong.mysql.tkmapper.GenericDao
