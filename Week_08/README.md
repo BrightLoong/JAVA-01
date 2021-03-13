@@ -9,7 +9,7 @@
 使用 hmily TCC + dubbo，参考hmily里面关于dubbo的demo实现。
 
 这里只使用了order和inventory这两个来进行TCC相关的实践，详见[hmily-demo-dubbo](../Home_Work/hmily-demo-dubbo)，启动项目通过
-[http://localhost:8087/swagger-ui.html](../Home_Work/hmily-demo-dubbo/hmily-demo-dubbo-order/src/main/java/io/github/brightloong/hmily/dubbo/order/controller/OrderController.java)进行访问，下面是对不同的场景最后的情况做一个记录。
+[http://localhost:8087/swagger-ui.html `(点击查看Controller实现)`](../Home_Work/hmily-demo-dubbo/hmily-demo-dubbo-order/src/main/java/io/github/brightloong/hmily/dubbo/order/controller/OrderController.java)进行访问，下面是对不同的场景最后的情况做一个记录。
 
 |             场景              |                             描述                             |
 | :---------------------------: | :----------------------------------------------------------: |
