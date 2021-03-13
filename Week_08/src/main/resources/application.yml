@@ -1,0 +1,55 @@
+spring:
+  # 相关的配置
+  shardingsphere:
+    props:
+      sql-show: true
+    datasource:
+      common:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+      # 配置数据源的名称
+      names: ds0,ds1
+      # 第一个数据源
+      ds0:
+        jdbcUrl: jdbc:mysql://localhost:3306/ds1?serverTimezone=CTT&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+        username: root
+        password: 123456
+      # 第二个数据源
+      ds1:
+        jdbcUrl: jdbc:mysql://localhost:3306/ds2?serverTimezone=CTT&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+        username: root
+        password: 123456
+    rules:
+      sharding:
+        tables:
+          t_order:
+            actual-data-nodes: ds$->{0..1}.t_order_$->{0..15}
+            tableStrategy:
+              standard:
+                shardingColumn: id
+                shardingAlgorithmName: id-inline
+            keyGenerateStrategy:
+              column: id
+              keyGeneratorName: snowflake
+        default-database-strategy:
+          standard:
+            shardingColumn: user_id
+            shardingAlgorithmName: database-inline
+        shardingAlgorithms:
+          database-inline:
+            type: INLINE
+            props:
+              algorithm-expression: ds$->{user_id%2}
+          id-inline:
+            type: INLINE
+            props:
+              algorithm-expression: t_order_$->{id % 16}
+        keyGenerators:
+          snowflake:
+            type: SNOWFLAKE
+            props:
+              worker-id: 123
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: io.github.brightloong.mysql.domain.pojo

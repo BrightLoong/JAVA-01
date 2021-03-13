@@ -3,26 +3,17 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>JAVA-01</artifactId>
+        <artifactId>hmily-demo-dubbo</artifactId>
         <groupId>io.github.brightloong</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>Home_Work</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>instrumentation_agent</module>
-        <module>bytebuddy_agent</module>
-        <module>school-spring-boot-starter</module>
-        <module>bright-datasource-spring-boot-start</module>
-        <module>hmily-demo-dubbo</module>
-    </modules>
+    <artifactId>hmily-demo-dubbo-common</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
-
 
 </project>
