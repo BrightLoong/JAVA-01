@@ -1,6 +1,12 @@
 ## 第十五节课作业
 ### 2、（必做）设计对前面的订单表数据进行水平分库分表，拆分2个库，每个库16张表。并在新结构在演示常见的增删改查操作。代码、sql和配置文件，上传到Github。
+使用sharding-jdbc实现
+
 配置文件详见[application.yml](./src/main/resources/application.yml)
+
+SQL脚本[table.sql](./src/main/resources/sql/table.sql)
+
+启动[App.java](./src/main/java/io/github/brightloong/sharding/App.java)
 
 ## 第十六节课作业
 
