@@ -1,9 +1,9 @@
 
 ## 第一节课
 ### 1、(必做)配置redis的主从复制，sentinel高可用，Cluster集群。
-> 各种配置文件和脚本详见 [配置文件和脚本](/cache-demo/src/main/resources/config)
+> 各种配置文件和脚本详见 [配置文件和脚本](./cache-demo/src/main/resources/config)
 
-> 测试代码详见[RedisDemo.java](/cache-demo/src/main/java/io/github/brightloong/cache/redis/RedisDemo.java)
+> 测试代码详见[RedisDemo.java](./cache-demo/src/main/java/io/github/brightloong/cache/redis/RedisDemo.java)
 #### 主从复制
 ```shell
 //启动redis
@@ -48,5 +48,5 @@
 ## 第二节课
 ### 1、(必做)搭建ActiveMQ服务，基于JMS，写代码分别实现对于queue和topic的消息 生产和消费，代码提交到github。
 
-> 测试代码详见[App.java](/mq-demo/src/main/java/io/github/brightloong/mq/active/App.java)
+> 测试代码详见[App.java](./mq-demo/src/main/java/io/github/brightloong/mq/active/App.java)
 
