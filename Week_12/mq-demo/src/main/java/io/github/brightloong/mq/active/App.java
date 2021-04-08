@@ -18,33 +18,17 @@ import javax.jms.TextMessage;
 public class App {
 
     public static void main(String[] args) throws Exception {
-        thread(new HelloWorldProducer(), false);
-        thread(new HelloWorldProducer(), false);
-        thread(new HelloWorldConsumer(), false);
-        Thread.sleep(1000);
-        thread(new HelloWorldConsumer(), false);
-        thread(new HelloWorldProducer(), false);
-        thread(new HelloWorldConsumer(), false);
-        thread(new HelloWorldProducer(), false);
-        Thread.sleep(1000);
-        thread(new HelloWorldConsumer(), false);
-        thread(new HelloWorldProducer(), false);
-        thread(new HelloWorldConsumer(), false);
-        thread(new HelloWorldConsumer(), false);
-        thread(new HelloWorldProducer(), false);
-        thread(new HelloWorldProducer(), false);
-        Thread.sleep(1000);
-        thread(new HelloWorldProducer(), false);
-        thread(new HelloWorldConsumer(), false);
-        thread(new HelloWorldConsumer(), false);
-        thread(new HelloWorldProducer(), false);
-        thread(new HelloWorldConsumer(), false);
-        thread(new HelloWorldProducer(), false);
-        thread(new HelloWorldConsumer(), false);
-        thread(new HelloWorldProducer(), false);
-        thread(new HelloWorldConsumer(), false);
-        thread(new HelloWorldConsumer(), false);
-        thread(new HelloWorldProducer(), false);
+        //topic
+        thread(new HelloWorldProducer(true), false);
+        thread(new HelloWorldConsumer(true), false);
+        thread(new HelloWorldConsumer(true), false);
+        thread(new HelloWorldConsumer(true), false);
+
+        //queue
+        thread(new HelloWorldProducer(false), false);
+        thread(new HelloWorldConsumer(false), false);
+        thread(new HelloWorldProducer(false), false);
+        thread(new HelloWorldConsumer(false), false);
     }
 
     public static void thread(Runnable runnable, boolean daemon) {
@@ -54,6 +38,12 @@ public class App {
     }
 
     public static class HelloWorldProducer implements Runnable {
+
+        private boolean isTopic;
+
+        public HelloWorldProducer(boolean isTopic) {
+            this.isTopic = isTopic;
+        }
         public void run() {
             try {
                 // Create a ConnectionFactory
@@ -67,7 +57,12 @@ public class App {
                 Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
                 // Create the destination (Topic or Queue)
-                Destination destination = session.createQueue("TEST.FOO");
+                Destination destination;
+                if (isTopic) {
+                    destination = session.createTopic("TEST.TOPIC");
+                } else {
+                    destination = session.createQueue("TEST.QUEUE");
+                }
 
                 // Create a MessageProducer from the Session to the Topic or Queue
                 MessageProducer producer = session.createProducer(destination);
@@ -92,6 +87,13 @@ public class App {
     }
 
     public static class HelloWorldConsumer implements Runnable, ExceptionListener {
+
+        private boolean isTopic;
+
+        public HelloWorldConsumer(boolean isTopic) {
+            this.isTopic = isTopic;
+        }
+
         public void run() {
             try {
 
@@ -108,7 +110,13 @@ public class App {
                 Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
                 // Create the destination (Topic or Queue)
-                Destination destination = session.createQueue("TEST.FOO");
+                Destination destination;
+                if (isTopic) {
+                     destination = session.createTopic("TEST.TOPIC");
+                } else {
+                    destination = session.createQueue("TEST.QUEUE");
+                }
+
 
                 // Create a MessageConsumer from the Session to the Topic or Queue
                 MessageConsumer consumer = session.createConsumer(destination);
