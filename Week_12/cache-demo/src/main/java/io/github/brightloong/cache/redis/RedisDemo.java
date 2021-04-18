@@ -7,6 +7,9 @@ import org.redisson.codec.JsonJacksonCodec;
 import org.redisson.config.Config;
 import org.redisson.config.ReadMode;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -31,6 +34,7 @@ public class RedisDemo {
             e.printStackTrace();
         }
         System.out.println(bucket.get());
+        new ArrayList<>();
     }
 
     private static RedissonClient clusterSlaveClient() {
