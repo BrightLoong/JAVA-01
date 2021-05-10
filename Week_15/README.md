@@ -19,6 +19,83 @@
 
 ### 四. Spring和ORM等框架
 
+#### 4.1 Spring
+##### 4.1.1 常用模块
+![常用模块](./image/spring/常用模块.png)
+##### 4.1.2 IOC
+
+控制反转，将Bean交给Spring管理，提供依赖查找和依赖注入的功能。
+
+##### 4.1.3 AOP
+
+面向切面编程，通过动态代理或者字节码增强的方式
+
+##### 4.1.4 Bean生命周期
+![生命周期](./image/spring/生命周期.png)
+
+#### 4.2 Spring Boot
+
+##### 4.2.1 自动装配
+
+`@SpringBootApplication`,SpringBoot 应用标注在某个类上说明这个类是 SpringBoot 的主配置类，SpringBoot 就会运行
+这个类的 main 方法来启动 SpringBoot 项目。
+- @SpringBootConfiguration 
+- @EnableAutoConfiguration 
+- @AutoConfigurationPackage
+- @Import({AutoConfigurationImportSelector.class})
+
+加载所有 META-INF/spring.factories 中存在的配置类。
+
+##### 4.2.2 starter
+
+![starter](./image/spring/starter.png)
+
+#### 4.3 设计原则
+
+S.O.L.I.D 是面向对象设计和编程(OOD&OOP)中几个重要编码原则(Programming Priciple)的首字
+母缩写。
+
+1. SRP:The Single Responsibility Principle 单一责任原则  
+2. OCP:The Open Closed Principle 开放封闭原则 
+3. LSP:The Liskov Substitution Principle 里氏替换原则 
+4. ISP:The Interface Segregation Principle 接口分离原则
+5. DIP:The Dependency Inversion Principle 依赖倒置原则
+
+最小知识原则，KISS，高内聚低耦合
+
+#### 4.4 设计模式
+
+GoF 23 个经典设计模式(面向接口编程)。
+
+创建型
+
+1. Factory Method(工厂方法) 2. Abstract Factory(抽象工厂) 3. Builder(建造者)
+4. Prototype(原型)
+5. Singleton(单例)
+   
+结构型
+6. Adapter(适配器) 
+7. Bridge(桥接)
+8. Composite(组合) 
+9. Decorator(装饰) 
+10. Facade(外观) 
+11. Flyweight(享元) 
+12. Proxy(代理)
+
+行为型
+
+13. Interpreter(解释器)
+14. Template Method(模板方法) 
+15. Chain of Responsibility(责任链) 
+16. Command(命令)
+17. Iterator(迭代器)
+18. Mediator(中介者)
+19. Memento(备忘录)
+20. Observer(观察者)
+21. State(状态)
+22. Strategy(策略)
+23. Visitor(访问者)
+
 ### 五. MySQL数据库和SQL 
 
 #### 5.1 MySQL执行流程
